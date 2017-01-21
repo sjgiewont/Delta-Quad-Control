@@ -17,7 +17,7 @@ def main():
     print "Open ANFIS"
     loadAnfisNetwork()
     print "ANFIS OPEN"
-    walk_dir(10, 0, 2, 100)
+    walk_dir(100, 0, 2, 100)
     print "Done Moving"
 
 
@@ -56,7 +56,7 @@ def walk_dir(step_length, degrees, step_num, precision):
 
     # step a certain amount of times
     while(steps < step_num):
-        # print "Front Left:", walking_trajectory[FL_leg_index]
+        print "Front Left:", walking_trajectory[FL_leg_index]
         # print "Front Right:", walking_trajectory[FR_leg_index]
         # print "Hind Left:", walking_trajectory[HL_leg_index]
         # print "Hind Right:", walking_trajectory[HR_leg_index]
