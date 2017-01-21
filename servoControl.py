@@ -1,6 +1,6 @@
 import numpy as np
-# import Adafruit_BBIO.UART as UART
-# import serial
+import Adafruit_BBIO.UART as UART
+import serial
 
 
 def startSerial():
@@ -58,7 +58,6 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     print final_cmd
 
 def serialSend_one(servo_values, leg_value):
-    global ser
     leg1 = np.array([1, 2, 3])
     leg2 = np.array([4, 5, 6])
     leg3 = np.array([7, 8, 9])

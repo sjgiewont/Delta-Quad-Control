@@ -1,6 +1,7 @@
 from inverseKinematics import *
 from piecewiseMotion import *
 from motion import *
+from servoControl import startSerial
 import Queue
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -10,8 +11,9 @@ import threading
 
 
 def main():
-
+    startSerial()
     walk_dir(0, 2, 100)
+
 
     # thread to continually check for user input
 
