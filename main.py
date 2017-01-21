@@ -17,7 +17,7 @@ def main():
     print "Open ANFIS"
     loadAnfisNetwork()
     print "ANFIS OPEN"
-    walk_dir(100, 0, 2, 100)
+    walk_dir(10, 0, 2, 100)
     print "Done Moving"
 
 
