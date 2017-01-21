@@ -19,6 +19,6 @@ def piecewiseMotion(step_length, degrees, precision):
 
     # create matrix of all positions along trajectory
     for i in range(len(t)):
-        piecewise.append([step_length*piecewise_x[i], step_length*piecewise_y[i], piecewise_z[i]-200])
+        piecewise.append([step_length*piecewise_x[i], step_length*piecewise_y[i], piecewise_z[i]-220])
 
     return piecewise
