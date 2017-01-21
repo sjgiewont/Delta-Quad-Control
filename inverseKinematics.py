@@ -1,5 +1,4 @@
 import numpy as np
-from visual import *
 from myAnfis import anfis
 import timeit
 import cPickle as pickle
