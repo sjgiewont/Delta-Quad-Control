@@ -3,7 +3,7 @@ from numpy import pi
 
 
 
-def piecewiseMotion(degrees, precision):
+def piecewiseMotion(step_length, degrees, precision):
     # set the step size of the time parameter
     t = np.linspace(0, 1, precision)
 
@@ -19,6 +19,6 @@ def piecewiseMotion(degrees, precision):
 
     # create matrix of all positions along trajectory
     for i in range(len(t)):
-        piecewise.append([10*piecewise_x[i], 10*piecewise_y[i], piecewise_z[i]-200])
+        piecewise.append([step_length*piecewise_x[i], step_length*piecewise_y[i], piecewise_z[i]-200])
 
     return piecewise
