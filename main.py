@@ -17,7 +17,7 @@ def main():
     print "Open ANFIS"
     loadAnfisNetwork()
     print "ANFIS OPEN"
-    walk_dir(100, 0, 2, 100)
+    walk_dir(100, 2, 0, 2, 100)
     print "Done Moving"
 
 
@@ -42,9 +42,9 @@ def main():
 
 # walking gait, can walk in a direction and particular number of steps.
 # The precision is the number incremental steps between the start and stop motions
-def walk_dir(step_length, degrees, step_num, precision):
+def walk_dir(step_length, step_height, degrees, step_num, precision):
     #calculate the walking trajectory of one step
-    walking_trajectory = piecewiseMotion(step_length, degrees, precision)
+    walking_trajectory = piecewiseMotion(step_length, step_height, degrees, precision)
 
     # initialize the index of each leg, offset all of them
     FL_leg_index = 0
