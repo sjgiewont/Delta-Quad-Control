@@ -2,6 +2,7 @@ from inverseKinematics import *
 from piecewiseMotion import *
 from motion import *
 from servoControl import startSerial
+from inverseKinematics import loadAnfisNetwork
 import Queue
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -11,8 +12,13 @@ import threading
 
 
 def main():
+    print "Start Serial"
     startSerial()
+    print "Open ANFIS"
+    loadAnfisNetwork()
+    print "ANFIS OPEN"
     walk_dir(0, 2, 100)
+    print "Done Moving"
 
 
     # thread to continually check for user input

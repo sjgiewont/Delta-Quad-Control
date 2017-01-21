@@ -9,9 +9,16 @@ leg = 266.7
 # length from center of base to axis of rotation
 base_radius = 55
 
-def getAnglePlatform(x_pos, y_pos):
+
+def loadAnfisNetwork():
+    global anf
     with open('fuzzycontrol_normal_3.pkl', 'rb') as f:
         anf = pickle.load(f)
+
+
+def getAnglePlatform(x_pos, y_pos):
+    # with open('fuzzycontrol_normal_3.pkl', 'rb') as f:
+    #     anf = pickle.load(f)
 
     input_val = np.array([[x_pos, y_pos]])
 
