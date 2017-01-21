@@ -50,7 +50,7 @@ def walk_dir(degrees, step_num, precision):
 
     # step a certain amount of times
     while(steps < step_num):
-        print "Front Left:", walking_trajectory[FL_leg_index]
+        # print "Front Left:", walking_trajectory[FL_leg_index]
         # print "Front Right:", walking_trajectory[FR_leg_index]
         # print "Hind Left:", walking_trajectory[HL_leg_index]
         # print "Hind Right:", walking_trajectory[HR_leg_index]

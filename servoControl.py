@@ -75,7 +75,7 @@ def serialSend_one(servo_values, leg_value):
         return ValueError
 
     final_cmd = "#%d P%d #%d P%d #%d P%d \r" % (leg[0], servo_values[0], leg[1], servo_values[1], leg[2], servo_values[2])
-    print final_cmd
+    # print final_cmd
 
     ser.write(final_cmd)
 

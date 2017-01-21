@@ -159,7 +159,7 @@ def inverseKinematics(pos):
     elif K3[2] == 0:
         theta1 = 180
 
-    print "Angles: ", theta1, theta2, theta3
+    # print "Angles: ", theta1, theta2, theta3
     return np.array([theta1, theta2, theta3])
 
 
