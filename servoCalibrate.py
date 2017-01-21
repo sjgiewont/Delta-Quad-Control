@@ -30,7 +30,7 @@ elif leg_value == 4:
 else:
     print "Error"
 
-servo_values = np.array([1500, 1500, 1500])
+servo_values = np.array([1550, 1550, 1550])
 
 final_cmd = "#%d P%d #%d P%d #%d P%d \r" % (leg[0], servo_values[0], leg[1], servo_values[1], leg[2], servo_values[2])
 ser.write(final_cmd)
