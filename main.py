@@ -17,8 +17,8 @@ def main():
     print "Open ANFIS"
     loadAnfisNetwork()
     print "ANFIS OPEN"
+    step_angle = 0
     while True:
-        step_angle = 0
         print step_angle
         walk_dir(100, 3, step_angle, 1, 150)
         step_angle += 1
