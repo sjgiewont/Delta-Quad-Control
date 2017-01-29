@@ -17,8 +17,12 @@ def main():
     print "Open ANFIS"
     loadAnfisNetwork()
     print "ANFIS OPEN"
-    walk_dir(100, 3, 90, 6, 100)
-    print "Done Moving"
+    while True:
+        step_angle = 0
+        print step_angle
+        walk_dir(100, 3, step_angle, 1, 150)
+        step_angle += 1
+        print "Done Moving"
 
 
     # thread to continually check for user input
