@@ -20,8 +20,8 @@ def main():
     step_angle = 0
     while True:
         print step_angle
-        walk_dir(100, 3, step_angle, 1, 150)
-        step_angle += 1
+        walk_dir(100, 75, step_angle, 1, 150)
+        step_angle += 5
         print "Done Moving"
 
 
