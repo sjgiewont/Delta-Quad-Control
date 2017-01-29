@@ -59,3 +59,10 @@ def piecewiseMotion_2(step_length, step_height, step_angle, leg_height, step_pre
     piecewise_y = np.piecewise(t, [(t >= 0) & (t <= step_up_time), t > step_up_time], [lambda t: (1 - m_step*t)*pos_0[1] + m_step*t*pos_1[1], lambda t: (1 - (m_drag*t + b_drag))*pos_1[1] + (m_drag*t + b_drag)*pos_0[1]])
     piecewise_z = np.piecewise(t, [(t >= 0) & (t <= step_up_time), (t > step_up_time)], [lambda t: z_constants[0,0]*t**2 + z_constants[1,0]*t + z_constants[2,0], lambda t: leg_height])
 
+    piecewise = []
+
+    # create matrix of all positions along trajectory
+    for i in range(len(t)):
+        piecewise.append([piecewise_x[i], piecewise_y[i], piecewise_z[i]])
+
+    return piecewise

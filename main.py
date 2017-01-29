@@ -44,7 +44,8 @@ def main():
 # The precision is the number incremental steps between the start and stop motions
 def walk_dir(step_length, step_height, degrees, step_num, precision):
     #calculate the walking trajectory of one step
-    walking_trajectory = piecewiseMotion(step_length, step_height, degrees, precision)
+    # walking_trajectory = piecewiseMotion(step_length, step_height, degrees, precision)
+    walking_trajectory = piecewiseMotion_2(step_length, step_height, degrees, -220, precision)
 
     # initialize the index of each leg, offset all of them
     FL_leg_index = 0
