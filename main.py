@@ -8,19 +8,28 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import timeit
 import thread
-import threading
+from threading import Thread
+from Blynk import *
+from time import sleep
+
 
 
 def main():
     print "Start Serial"
     startSerial()
+
     print "Open ANFIS"
     loadAnfisNetwork()
     print "ANFIS OPEN"
+
+    print "Starting Blynk Connection"
+    vrep_control_thread = Thread(target=blynk_controller, args=())
+    vrep_control_thread.start()
+
     step_angle = 0
     while True:
         print step_angle
-        walk_dir(100, 75, step_angle, 1, 150)
+        walk_dir(100, 50, step_angle, 1, 150)
         step_angle += 5
         print "Done Moving"
 
@@ -61,7 +70,9 @@ def walk_dir(step_length, step_height, degrees, step_num, precision):
 
     # step a certain amount of times
     while(steps < step_num):
-        print "Front Left:", walking_trajectory[FL_leg_index]
+
+        print "Blynk: ", blynk_x_pos, blynk_y_pos
+        # print "Front Left:", walking_trajectory[FL_leg_index]
         # print "Front Right:", walking_trajectory[FR_leg_index]
         # print "Hind Left:", walking_trajectory[HL_leg_index]
         # print "Hind Right:", walking_trajectory[HR_leg_index]
@@ -151,6 +162,32 @@ def add_leg1(first_pos, new_pos):
 
     curr_pos1 = step_to(leg1_q, first_pos, new_pos, 5)
     return
+
+
+def blynk_controller():
+    auth_token = "340c28ef62d94a998855b7c8d4b89651"
+
+    blynk = Blynk(auth_token)
+
+    while not blynk.app_status():
+        print "Phone not connected"
+        sleep(0.5)
+
+    global blynk_height, blynk_x_pos, blynk_y_pos
+
+    # create objects
+    slider_height = Blynk(auth_token, pin="V0")
+    joystick_pos = Blynk(auth_token, pin="V1")
+
+    # get current status
+    while (1):
+        curr_height = slider_height.get_val()
+        curr_pos = joystick_pos.get_val()
+        blynk_height = int(curr_height[0])
+        blynk_x_pos = -(512 - int(curr_pos[0]))
+        blynk_y_pos = -(512 - int(curr_pos[1]))
+
+        sleep(0.001)
 
 if __name__ == "__main__":
     main()
