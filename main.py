@@ -173,7 +173,7 @@ def blynk_controller():
         print "Phone not connected"
         sleep(0.5)
 
-    # global blynk_height, blynk_x_pos, blynk_y_pos
+    global blynk_height, blynk_x_pos, blynk_y_pos
 
     # create objects
     slider_height = Blynk(auth_token, pin="V0")
