@@ -12,7 +12,8 @@ from threading import Thread
 from Blynk import *
 from time import sleep
 
-global blynk_x_pos, blynk_y_pos
+blynk_x_pos = 0
+blynk_y_pos = 0
 
 def main():
     print "Start Serial"
