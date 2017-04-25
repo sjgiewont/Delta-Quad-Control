@@ -1,0 +1,6 @@
+# Created by Steven Giewont
+
+# file locks introduced since 7.x
+*.pyc
+*/.iml
+*/.xml
