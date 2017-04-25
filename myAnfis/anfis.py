@@ -286,7 +286,6 @@ def predict(ANFISObj, varsToTest):
 
     #layer five
     layer_five = np.dot(layerFour,ANFISObj.consequents)
-    print layer_five
     return layer_five
 
 if __name__ == "__main__":
