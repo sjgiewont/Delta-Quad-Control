@@ -50,12 +50,13 @@ def mapping(value, fromLow, fromHigh, toLow, toHigh):
 
 def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     cmd1 = "#1 P%d #2 P%d #3 P%d " % (leg_1_thetas[0], leg_1_thetas[1], leg_1_thetas[2])
-    cmd2 = "#4 P%d #5 P%d #6 P%d" % (leg_2_thetas[0], leg_2_thetas[1], leg_2_thetas[2])
-    cmd3 = "#7 P%d #8 P%d #9 P%d" % (leg_3_thetas[0], leg_3_thetas[1], leg_3_thetas[2])
-    cmd4 = "#10 P%d #11 P%d #12 P%d" % (leg_4_thetas[0], leg_4_thetas[1], leg_4_thetas[2])
+    cmd2 = "#12 P%d #13 P%d #14 P%d " % (leg_2_thetas[0], leg_2_thetas[1], leg_2_thetas[2])
+    cmd3 = "#16 P%d #17 P%d #18 P%d " % (leg_3_thetas[0], leg_3_thetas[1], leg_3_thetas[2])
+    cmd4 = "#28 P%d #29 P%d #30 P%d " % (leg_4_thetas[0], leg_4_thetas[1], leg_4_thetas[2])
 
     final_cmd = " ".join((cmd1, cmd2, cmd3, cmd4))
     print final_cmd
+    ser.write(final_cmd)
 
 def serialSend_one(servo_values, leg_value):
     leg1 = np.array([1, 2, 3])

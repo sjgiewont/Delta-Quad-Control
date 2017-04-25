@@ -24,15 +24,16 @@ def main():
     print "ANFIS OPEN"
 
     print "Starting Blynk Connection"
-    vrep_control_thread = Thread(target=blynk_controller, args=())
-    vrep_control_thread.start()
+    blynk_control_thread = Thread(target=blynk_controller, args=())
+    blynk_control_thread.start()
 
-    step_angle = 0
+    step_angle = 90
+    step_length = 100
+    step_height = 0
+    step_precision = 300
     while True:
-        print step_angle
-        walk_dir(100, 50, step_angle, 1, 150)
+        walk_dir(step_length, step_height, step_angle, 1, step_precision)
         step_angle += 5
-        print "Done Moving"
 
 
     # thread to continually check for user input
@@ -59,13 +60,16 @@ def main():
 def walk_dir(step_length, step_height, degrees, step_num, precision):
     #calculate the walking trajectory of one step
     # walking_trajectory = piecewiseMotion(step_length, step_height, degrees, precision)
-    walking_trajectory = piecewiseMotion_2(step_length, step_height, degrees, -220, precision)
+    walking_trajectory_R = piecewiseMotion_3(step_length, step_height, degrees, -200, precision)
+    walking_trajectory_L = piecewiseMotion_3(step_length, step_height, degrees - 180, -200, precision)
 
     # initialize the index of each leg, offset all of them
     FL_leg_index = 0
-    FR_leg_index = 25
-    HL_leg_index = 50
-    HR_leg_index = 75
+    FR_leg_index = precision / 4
+    HL_leg_index = 2 * (precision / 4)
+    HR_leg_index = 3 * (precision / 4)
+
+    leg_index = [FL_leg_index, FR_leg_index, HL_leg_index, HR_leg_index]
 
     steps = 0
 
@@ -78,12 +82,9 @@ def walk_dir(step_length, step_height, degrees, step_num, precision):
         # print "Hind Left:", walking_trajectory[HL_leg_index]
         # print "Hind Right:", walking_trajectory[HR_leg_index]
 
-        move_to_pos(walking_trajectory[FL_leg_index], 1)
+        move_to_pos(walking_trajectory_R, walking_trajectory_L, leg_index)
 
-        FL_leg_index += 1
-        FR_leg_index += 1
-        HL_leg_index += 1
-        HR_leg_index += 1
+        leg_index = [x + 1 for x in leg_index]
 
         # if reached index limit, loop back and restart index count
         if FL_leg_index >= precision:

@@ -12,9 +12,16 @@ base_radius = 55
 
 def loadAnfisNetwork():
     global anf
-    with open('fuzzycontrol_normal_3.pkl', 'rb') as f:
+    with open('fuzzy_log_test_table_90_270_5_epoch_20.pkl', 'rb') as f:
         anf = pickle.load(f)
+    return anf
 
+def getMotorAngles(x_pos, y_pos, z_pos):
+    input_val = np.array([[x_pos, y_pos, z_pos]])
+
+    anfis_matrix = anfis.predict(anf, input_val)
+
+    return np.array([anfis_matrix[0,0], anfis_matrix[0, 1], anfis_matrix[0, 2]])
 
 def getAnglePlatform(x_pos, y_pos):
     # with open('fuzzycontrol_normal_3.pkl', 'rb') as f:
@@ -124,50 +131,31 @@ def getKneePosition(base_p, new_p):
 
 
 def inverseKinematics(pos):
-    # pos = np.array([x, y, z])
-
     # get the estimated angle platform using ANFIS model
-    normal_vector = getAnglePlatform(pos[0], pos[1])
+    motor_angles = getMotorAngles(pos[0], pos[1], pos[2])
 
-    # obtain the actual positions of the platform corners given its center position and the normal vector
-    new_p1, new_p2, new_p3 = getPlatformPositions(normal_vector, pos)
-
-    # define the position where the arms meet the base
-    base_1 = np.array([base_radius * np.cos(np.deg2rad(90)), base_radius * np.sin(np.deg2rad(90)), 0])
-    base_2 = np.array([base_radius * np.cos(np.deg2rad(210)), base_radius * np.sin(np.deg2rad(210)), 0])
-    base_3 = np.array([base_radius * np.cos(np.deg2rad(330)), base_radius * np.sin(np.deg2rad(330)), 0])
-
-    K1 = getKneePosition(base_1, new_p1)
-    K2 = getKneePosition(base_2, new_p2)
-    K3 = getKneePosition(base_3, new_p3)
-
-    theta1 = angle_between(K1 - base_1, base_1)
-    theta2 = angle_between(K2 - base_2, base_2)
-    theta3 = angle_between(K3 - base_3, base_3)
-
-    if K1[2] > 0:
-        theta1 = 180 - theta1
-    elif K1[2] < 0:
-        theta1 = 180 + theta1
-    elif K1[2] == 0:
-        theta1 = 180
-
-    if K2[2] > 0:
-        theta2 = 180 - theta2
-    elif K2[2] < 0:
-        theta2 = 180 + theta2
-    elif K2[2] == 0:
-        theta1 = 180
-
-    if K3[2] > 0:
-        theta3 = 180 - theta3
-    elif K3[2] < 0:
-        theta3 = 180 + theta3
-    elif K3[2] == 0:
-        theta1 = 180
+    if motor_angles[0] > 270:
+        print "MOTOR 0 LIMIT EXCEEDED!"
+        motor_angles[0] = 270
+    if motor_angles[1] > 270:
+        print "MOTOR 1 LIMIT EXCEEDED!"
+        motor_angles[1] = 270
+    if motor_angles[2] > 270:
+        print "MOTOR 2 LIMIT EXCEEDED!"
+        motor_angles[2] = 270
+    if motor_angles[0] < 90:
+        print "MOTOR 0 LIMIT EXCEEDED!"
+        motor_angles[0] = 90
+    if motor_angles[0] < 90:
+        print "MOTOR 1 LIMIT EXCEEDED!"
+        motor_angles[0] = 90
+    if motor_angles[0] < 90:
+        print "MOTOR 2 LIMIT EXCEEDED!"
+        motor_angles[0] = 90
 
     # print "Angles: ", theta1, theta2, theta3
-    return np.array([theta1, theta2, theta3])
+    return motor_angles
+
 
 
 

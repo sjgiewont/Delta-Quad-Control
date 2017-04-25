@@ -8,10 +8,18 @@ from servoControl import *
 import main
 
 
-def move_to_pos(position, leg):
-     servos_angles = inverseKinematics(position)
-     servo_values = angleToServoValue(servos_angles, leg)
-     serialSend_one(servo_values, leg)
+def move_to_pos(position_R, position_L, index):
+    leg_1_thetas = inverseKinematics(position_R[index[0]])
+    leg_2_thetas = inverseKinematics(position_R[index[1]])
+    leg_3_thetas = inverseKinematics(position_L[index[2]])
+    leg_4_thetas = inverseKinematics(position_L[index[3]])
+
+    servo_1_values = angleToServoValue(leg_1_thetas, 1)
+    servo_2_values = angleToServoValue(leg_2_thetas, 2)
+    servo_3_values = angleToServoValue(leg_3_thetas, 3)
+    servo_4_values = angleToServoValue(leg_4_thetas, 4)
+
+    serialSend_All(servo_1_values, servo_2_values, servo_3_values, servo_4_values)
 
 def step(curr_pos, new_pos):
     #parabola function between 2 points
