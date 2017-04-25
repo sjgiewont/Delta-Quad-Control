@@ -87,18 +87,18 @@ def walk_dir(step_length, step_height, degrees, step_num, precision):
         leg_index = [x + 1 for x in leg_index]
 
         # if reached index limit, loop back and restart index count
-        if FL_leg_index >= precision:
-            FL_leg_index = 0
-            steps += 1                  # keep track of the number of steps taken
+        if leg_index[0] >= precision:
+            leg_index[0] = 0
+            steps += 1  # keep track of the number of steps taken
 
-        if FR_leg_index >= precision:
-            FR_leg_index = 0
+        if leg_index[1] >= precision:
+            leg_index[1] = 0
 
-        if HL_leg_index >= precision:
-            HL_leg_index = 0
+        if leg_index[2] >= precision:
+            leg_index[2] = 0
 
-        if HR_leg_index >= precision:
-            HR_leg_index = 0
+        if leg_index[3] >= precision:
+            leg_index[3] = 0
 
 
 
