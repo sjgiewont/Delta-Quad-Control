@@ -285,8 +285,9 @@ def predict(ANFISObj, varsToTest):
     [layerFour] = forwardHalfPass(ANFISObj, varsToTest)
 
     #layer five
-    return np.dot(layerFour,ANFISObj.consequents)
-
+    layer_five = np.dot(layerFour,ANFISObj.consequents)
+    print layer_five
+    return layer_five
 
 if __name__ == "__main__":
     print "I am main!"

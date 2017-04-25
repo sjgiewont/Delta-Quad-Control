@@ -21,7 +21,7 @@ def getMotorAngles(x_pos, y_pos, z_pos):
 
     anfis_matrix = anfis.predict(anf, input_val)
 
-    return np.array([anfis_matrix[0,0], anfis_matrix[0, 1], anfis_matrix[0, 2]])
+    return np.array([anfis_matrix[0], anfis_matrix[0], anfis_matrix[0]])
 
 # def getAnglePlatform(x_pos, y_pos):
 #     # with open('fuzzycontrol_normal_3.pkl', 'rb') as f:
