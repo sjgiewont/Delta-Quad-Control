@@ -13,7 +13,7 @@ def move_to_pos(position_R, position_L, index):
     leg_1_thetas = inverseKinematics(position_R[index[0]])
     stop = timeit.default_timer()
     print "The Time:", stop - start
-    
+
     leg_2_thetas = inverseKinematics(position_R[index[1]])
     leg_3_thetas = inverseKinematics(position_L[index[2]])
     leg_4_thetas = inverseKinematics(position_L[index[3]])

@@ -192,44 +192,37 @@ class ANFIS:
 def forwardHalfPass(ANFISObj, Xs):
     layerFour = np.empty(0,)
     wSum = []
-    count = 0
 
     for pattern in range(len(Xs[:,0])):
-        if count == 100:
-            count = 0
-            print "Forward Pass: ", pattern
-
-        count += 1
-
         #layer one
         layerOne = ANFISObj.memClass.evaluateMF(Xs[pattern,:])
 
         #layer two
         miAlloc = [[layerOne[x][ANFISObj.rules[row][x]] for x in range(len(ANFISObj.rules[0]))] for row in range(len(ANFISObj.rules))]
         layerTwo = np.array([np.product(x) for x in miAlloc]).T
-        if pattern == 0:
-            w = layerTwo
-        else:
-            w = np.vstack((w,layerTwo))
+        # if pattern == 0:
+        #     w = layerTwo
+        # else:
+        #     w = np.vstack((w,layerTwo))
 
         #layer three
         wSum.append(np.sum(layerTwo))
-        if pattern == 0:
-            wNormalized = layerTwo/wSum[pattern]
-        else:
-            wNormalized = np.vstack((wNormalized,layerTwo/wSum[pattern]))
+        # if pattern == 0:
+        #     wNormalized = layerTwo/wSum[pattern]
+        # else:
+        #     wNormalized = np.vstack((wNormalized,layerTwo/wSum[pattern]))
 
         #prep for layer four (bit of a hack)
         layerThree = layerTwo/wSum[pattern]
         rowHolder = np.concatenate([x*np.append(Xs[pattern,:],1) for x in layerThree])
         layerFour = np.append(layerFour,rowHolder)
 
-    w = w.T
-    wNormalized = wNormalized.T
+    # w = w.T
+    # wNormalized = wNormalized.T
 
     layerFour = np.array(np.array_split(layerFour,pattern + 1))
 
-    return layerFour, wSum, w
+    return layerFour
 
 
 def backprop(ANFISObj, columnX, columns, theWSum, theW, theLayerFive):
@@ -289,12 +282,10 @@ def backprop(ANFISObj, columnX, columns, theWSum, theW, theLayerFive):
 
 def predict(ANFISObj, varsToTest):
 
-    [layerFour, wSum, w] = forwardHalfPass(ANFISObj, varsToTest)
+    [layerFour] = forwardHalfPass(ANFISObj, varsToTest)
 
     #layer five
-    layerFive = np.dot(layerFour,ANFISObj.consequents)
-
-    return layerFive
+    return np.dot(layerFour,ANFISObj.consequents)
 
 
 if __name__ == "__main__":
