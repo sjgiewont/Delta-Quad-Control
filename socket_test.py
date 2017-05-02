@@ -12,9 +12,9 @@ def recieve_socket_commands(clientsocket):
     # receive the commands here
     buf = clientsocket.recv(MAX_LENGTH)
     buf_string = buf.decode()
-    # print(buf_string)
+    print(buf_string)
     buf_array = buf_string.split(",", 11)
-    # print(buf_array)
+    print(buf_array)
 
     start = timeit.default_timer()
 
