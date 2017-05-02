@@ -28,12 +28,15 @@ def recieve_socket_commands(clientsocket):
 # setup a socket that will recieve commands from Python2 code
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+serversocket.close()
+
 # define port and host address
 PORT = 12345
 HOST = '129.21.91.193'
 
 serversocket.bind((HOST, PORT))
 serversocket.listen(10)
+
 
 print('Start Accept connections')
 # accept connections from outside
