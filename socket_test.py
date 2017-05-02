@@ -1,6 +1,6 @@
 import timeit
 import sys
-import socket
+from socket import *
 from threading import Thread
 import numpy as np
 
@@ -26,7 +26,9 @@ def recieve_socket_commands(clientsocket):
 
 
 # setup a socket that will recieve commands from Python2 code
-serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SO_REUSEADDR)
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+serversocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
 # define port and host address
 PORT = 12345
