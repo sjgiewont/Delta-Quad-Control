@@ -22,7 +22,7 @@ def recieve_socket_commands(clientsocket):
     if buf == '':
         return #client terminated connection
     if buf:
-        print(np.radians(float(buf_array[0]) - 180))
+        print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
 
 
 # setup a socket that will recieve commands from Python2 code
