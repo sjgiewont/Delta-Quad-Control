@@ -6,7 +6,7 @@ import numpy as np
 
 MAX_LENGTH = 95
 
-def recieve_socket_commands(clientsocket, clientID):
+def recieve_socket_commands(clientsocket):
   angle = 4.5
   while 1:
     # receive the commands here
@@ -35,4 +35,9 @@ HOST = '129.21.91.193'
 serversocket.bind((HOST, PORT))
 serversocket.listen(10)
 
-recieve_socket_commands()
+print('Start Accept connections')
+# accept connections from outside
+(clientsocket, address) = serversocket.accept()
+print('Accept connections')
+
+recieve_socket_commands(clientsocket)
