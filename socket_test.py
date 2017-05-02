@@ -26,7 +26,7 @@ def recieve_socket_commands(clientsocket):
 
 
 # setup a socket that will recieve commands from Python2 code
-serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serversocket = socket(AF_INET, SOCK_STREAM)
 
 serversocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
