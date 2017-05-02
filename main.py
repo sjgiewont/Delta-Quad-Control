@@ -10,7 +10,7 @@ import timeit
 import thread
 from threading import Thread
 from Blynk import *
-from time import sleep
+from time import *
 
 blynk_x_pos = 0
 blynk_y_pos = 0
@@ -30,30 +30,17 @@ def main():
     step_angle = 90
     step_length = 100
     step_height = 0
-    step_precision = 300
+    step_precision = 250
+    num_steps = 3
+
     while True:
-        walk_dir(step_length, step_height, step_angle, 1, step_precision)
-        step_angle += 5
+        curr_pos = walk_dir(step_length, step_height, step_angle, num_steps, step_precision)
+        homePos(curr_pos)
+        time.sleep(2)
+        step_angle += 45
+        # print "Done Moving"
 
 
-    # thread to continually check for user input
-
-    # need function for walking
-    # def walk(direction, speed):
-    #   global curr_pos
-    #   step1 = [1, 0, 0]
-    #   step2 = [-1, 0, 0]
-    #
-    #   step_to(leg, curr_pos, new_pos, step_height)
-    #
-
-    # execute walking trajectory
-    # while (leg1_q.empty() != True or leg2_q.empty() != True):
-    #     leg1_pos = leg1_q.get(2)
-    #     print leg1_pos[0]
-        # print leg2_q.get()
-        # print leg3_q.get()
-        # print leg4_q.get()
 
 # walking gait, can walk in a direction and particular number of steps.
 # The precision is the number incremental steps between the start and stop motions
@@ -72,6 +59,24 @@ def walk_dir(step_length, step_height, degrees, step_num, precision):
     leg_index = [FL_leg_index, FR_leg_index, HL_leg_index, HR_leg_index]
 
     steps = 0
+
+    home_pos = [0, 0, -200]
+    start_step_precision = 150
+
+    parabola_motion_2 = parabolaStep(home_pos, walking_trajectory_L[FR_leg_index], 75, -200, start_step_precision)
+    parabola_motion_3 = parabolaStep(home_pos, walking_trajectory_R[HL_leg_index], 75, -200, start_step_precision)
+
+    for index in range(0, start_step_precision):
+        leg1 = inverseKinematics(home_pos)
+        leg2 = inverseKinematics(parabola_motion_2[index])
+        leg3 = inverseKinematics(parabola_motion_3[index])
+        leg4 = inverseKinematics(home_pos)
+        leg_1_servoval = angleToServoValue(leg1, 1)
+        leg_2_servoval = angleToServoValue(leg2, 2)
+        leg_3_servoval = angleToServoValue(leg3, 3)
+        leg_4_servoval = angleToServoValue(leg4, 4)
+        serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
+
 
     # step a certain amount of times
     while(steps < step_num):
@@ -100,6 +105,7 @@ def walk_dir(step_length, step_height, degrees, step_num, precision):
         if leg_index[3] >= precision:
             leg_index[3] = 0
 
+    return [walking_trajectory_R[leg_index[0]], walking_trajectory_R[leg_index[1]], walking_trajectory_L[leg_index[2]], walking_trajectory_L[leg_index[3]]]
 
 
 
@@ -190,6 +196,103 @@ def blynk_controller():
         blynk_y_pos = -(512 - int(curr_pos[1]))
 
         sleep(0.001)
+
+
+def homePos(curr_pos):
+    home_pos = [0, 0, -200]
+    step_height = 75
+    precision = 150
+
+    leg_1_pos = curr_pos[0]
+    leg_2_pos = curr_pos[1]
+    leg_3_pos = curr_pos[2]
+    leg_4_pos = curr_pos[3]
+
+
+    if curr_pos[0][0] > 0:
+        parabola_motion_1 = parabolaStep(leg_1_pos, home_pos, 0, -200, precision)
+        for index in range(0, precision):
+            leg1 = inverseKinematics(parabola_motion_1[index])
+            leg2 = inverseKinematics(curr_pos[1])
+            leg3 = inverseKinematics(curr_pos[2])
+            leg4 = inverseKinematics(curr_pos[3])
+            leg_1_servoval = angleToServoValue(leg1, 1)
+            leg_2_servoval = angleToServoValue(leg2, 2)
+            leg_3_servoval = angleToServoValue(leg3, 3)
+            leg_4_servoval = angleToServoValue(leg4, 4)
+            serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
+        curr_pos[0] = parabola_motion_1[index]
+
+    elif curr_pos[0][0] < 0:
+        parabola_motion_1 = parabolaStep(leg_1_pos, home_pos, step_height, -200, precision)
+
+    if curr_pos[1][0] > 0:
+        parabola_motion_2 = parabolaStep(leg_2_pos, home_pos, 0, -200, precision)
+        for index in range(0, precision):
+            leg1 = inverseKinematics(curr_pos[0])
+            leg2 = inverseKinematics(parabola_motion_2[index])
+            leg3 = inverseKinematics(curr_pos[2])
+            leg4 = inverseKinematics(curr_pos[3])
+            leg_1_servoval = angleToServoValue(leg1, 1)
+            leg_2_servoval = angleToServoValue(leg2, 2)
+            leg_3_servoval = angleToServoValue(leg3, 3)
+            leg_4_servoval = angleToServoValue(leg4, 4)
+            serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
+        curr_pos[1] = parabola_motion_2[index]
+
+    elif curr_pos[1][0] < 0:
+        parabola_motion_2 = parabolaStep(leg_2_pos, home_pos, step_height, -200, precision)
+
+    if curr_pos[2][0] < 0:
+        parabola_motion_3 = parabolaStep(leg_3_pos, home_pos, 0, -200, precision)
+        for index in range(0, precision):
+            leg1 = inverseKinematics(curr_pos[0])
+            leg2 = inverseKinematics(curr_pos[1])
+            leg3 = inverseKinematics(parabola_motion_3[index])
+            leg4 = inverseKinematics(curr_pos[3])
+            leg_1_servoval = angleToServoValue(leg1, 1)
+            leg_2_servoval = angleToServoValue(leg2, 2)
+            leg_3_servoval = angleToServoValue(leg3, 3)
+            leg_4_servoval = angleToServoValue(leg4, 4)
+            serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
+        curr_pos[2] = parabola_motion_3[index]
+
+    elif curr_pos[2][0] > 0:
+        parabola_motion_3 = parabolaStep(leg_3_pos, home_pos, step_height, -200, precision)
+
+    if curr_pos[3][0] < 0:
+        parabola_motion_4 = parabolaStep(leg_4_pos, home_pos, 0, -200, precision)
+        for index in range(0, precision):
+            leg1 = inverseKinematics(curr_pos[0])
+            leg2 = inverseKinematics(curr_pos[1])
+            leg3 = inverseKinematics(curr_pos[2])
+            leg4 = inverseKinematics(parabola_motion_4[index])
+            leg_1_servoval = angleToServoValue(leg1, 1)
+            leg_2_servoval = angleToServoValue(leg2, 2)
+            leg_3_servoval = angleToServoValue(leg3, 3)
+            leg_4_servoval = angleToServoValue(leg4, 4)
+            serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
+        curr_pos[3] = parabola_motion_4[index]
+
+    elif curr_pos[3][0] > 0:
+        parabola_motion_4 = parabolaStep(leg_4_pos, home_pos, step_height, -200, precision)
+
+
+    for index in range(0, precision):
+        if curr_pos[0][0] != 0:
+            leg1 = inverseKinematics(parabola_motion_1[index])
+        if curr_pos[1][0] != 0:
+            leg2 = inverseKinematics(parabola_motion_2[index])
+        if curr_pos[2][0] != 0:
+            leg3 = inverseKinematics(parabola_motion_3[index])
+        if curr_pos[3][0] != 0:
+            leg4 = inverseKinematics(parabola_motion_4[index])
+
+        leg_1_servoval = angleToServoValue(leg1, 1)
+        leg_2_servoval = angleToServoValue(leg2, 2)
+        leg_3_servoval = angleToServoValue(leg3, 3)
+        leg_4_servoval = angleToServoValue(leg4, 4)
+        serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
 
 if __name__ == "__main__":
     main()
