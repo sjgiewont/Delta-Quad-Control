@@ -55,7 +55,7 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     cmd4 = "#28 P%d #29 P%d #30 P%d" % (leg_4_thetas[0], leg_4_thetas[1], leg_4_thetas[2])
 
     final_cmd = " ".join((cmd1, cmd2, cmd3, cmd4))
-    #print final_cmd
+    print final_cmd
     ser.write(final_cmd)
 
 def serialSend_one(servo_values, leg_value):
