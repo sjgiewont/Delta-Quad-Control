@@ -45,18 +45,22 @@ print('Accept connections')
 
 my_queue = Queue(maxsize=0)
 
-
 socket_read_thread = Thread(target=recieve_socket_commands, args=(clientsocket, my_queue))
 socket_read_thread.start()
 # recieve_socket_commands(clientsocket)
 
-while 1:
-    buf_array = my_queue.get()
-    print buf_array
+try:
+    while 1:
+        buf_array = my_queue.get()
+        print buf_array
 
-    # if buf == '':
-    #     return  # client terminated connection
-    # if buf:
-    #     print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
+        # if buf == '':
+        #     return  # client terminated connection
+        # if buf:
+        #     print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
 
-    print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
+        print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
+except:
+    my_queue.join()
+    socket_read_thread.join()
+    serversocket.close()
