@@ -8,15 +8,29 @@ import numpy as np
 MAX_LENGTH = 95
 
 def recieve_socket_commands(clientsocket, my_queue):
-  angle = 4.5
-  while 1:
+    angle = 4.5
+    buf = []
+
+    while 1:
+        buf = clientsocket.recv(500)
+        buf_string = buf.decode()
+        buf_array = buf_string.split(",", 11)
+        print("The buf_array:", buf_array)
+        if len(buf_array) != 12:
+            buf = ''
+            print("ERROR: Too many/not enough arguments received")
+            break
+        else:
+        print(buf_array)
+        my_queue.put(buf_array)
+
     # receive the commands here
-    buf = clientsocket.recv(MAX_LENGTH)
-    buf_string = buf.decode()
-    # print(buf_string)
-    buf_array = buf_string.split(",", 11)
-    # print(buf_array)
-    my_queue.put(buf_array)
+    # buf = clientsocket.recv(MAX_LENGTH)
+    # buf_string = buf.decode()
+    # # print(buf_string)
+    # buf_array = buf_string.split(",", 11)
+    # # print(buf_array)
+    # my_queue.put(buf_array)
 
     # print(int(buf_array[1]) + int(buf_array[0]))
     # if buf == '':
