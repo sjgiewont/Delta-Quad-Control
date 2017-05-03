@@ -15,13 +15,13 @@ def recieve_socket_commands(clientsocket, my_queue):
         buf = clientsocket.recv(500)
         buf_string = buf.decode()
         buf_array = buf_string.split(",", 11)
-        print("The buf_array:", buf_array)
+        print "The buf_array:", buf_array
         if len(buf_array) != 12:
             buf = ''
-            print("ERROR: Too many/not enough arguments received")
+            print "ERROR: Too many/not enough arguments received"
             break
         else:
-        print(buf_array)
+        print buf_array
         my_queue.put(buf_array)
 
     # receive the commands here
