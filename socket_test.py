@@ -5,7 +5,7 @@ from threading import Thread
 from Queue import Queue
 import numpy as np
 
-MAX_LENGTH = 95
+MAX_LENGTH = 96
 
 def recieve_socket_commands(clientsocket, my_queue):
     angle = 4.5
