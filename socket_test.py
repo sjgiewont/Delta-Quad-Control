@@ -66,6 +66,8 @@ socket_read_thread = Thread(target=recieve_socket_commands, args=(clientsocket, 
 socket_read_thread.start()
 # recieve_socket_commands(clientsocket)
 
+startSerial()
+
 try:
     while 1:
         buf_array = my_queue.get()
@@ -75,8 +77,8 @@ try:
         leg_2_servo = angleToServoValue([float(buf_array[3]), float(buf_array[4]), float(buf_array[5])], 2)
         leg_3_servo = angleToServoValue([float(buf_array[6]), float(buf_array[7]), float(buf_array[8])], 3)
         leg_4_servo = angleToServoValue([float(buf_array[9]), float(buf_array[10]), float(buf_array[11])], 4)
-        # serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
-        print leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo
+        serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
+        # print leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo
 
 except:
     my_queue.join()
