@@ -12,6 +12,7 @@ def recieve_socket_commands(clientsocket, my_queue):
   while 1:
     # receive the commands here
     buf = clientsocket.recv(MAX_LENGTH)
+    clientsocket.recv()
     buf_string = buf.decode()
     # print(buf_string)
     buf_array = buf_string.split(",", 11)
@@ -32,7 +33,7 @@ serversocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
 # define port and host address
 PORT = 12345
-HOST = '129.21.91.193'
+HOST = '129.21.90.103'
 
 serversocket.bind((HOST, PORT))
 serversocket.listen(10)
