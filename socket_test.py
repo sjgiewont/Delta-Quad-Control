@@ -12,7 +12,6 @@ def recieve_socket_commands(clientsocket, my_queue):
   while 1:
     # receive the commands here
     buf = clientsocket.recv(MAX_LENGTH)
-    clientsocket.recv()
     buf_string = buf.decode()
     # print(buf_string)
     buf_array = buf_string.split(",", 11)
