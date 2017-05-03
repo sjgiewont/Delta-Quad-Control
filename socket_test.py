@@ -21,8 +21,8 @@ def recieve_socket_commands(clientsocket, my_queue):
             print "ERROR: Too many/not enough arguments received"
             break
         else:
-        print buf_array
-        my_queue.put(buf_array)
+            print buf_array
+            my_queue.put(buf_array)
 
     # receive the commands here
     # buf = clientsocket.recv(MAX_LENGTH)
