@@ -19,7 +19,7 @@ def recieve_socket_commands(clientsocket, my_queue):
             if len(buf_array) != 12:
                 buf = ''
                 print "ERROR: Too many/not enough arguments received"
-                break
+                continue
             else:
                 my_queue.put(buf_array)
     except:
