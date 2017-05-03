@@ -16,13 +16,13 @@ def startSerial():
 
 def angleToServoValue(thetas, leg_num):
     if leg_num == 1:
-        servoValues = np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)])
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
     elif leg_num == 2:
-        servoValues = np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)])
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
     elif leg_num == 3:
-        servoValues = np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)])
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
     elif leg_num == 4:
-        servoValues = np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)])
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
     else:
         return ValueError
 
