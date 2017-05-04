@@ -50,7 +50,7 @@ def mapping(value, fromLow, fromHigh, toLow, toHigh):
 
 def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     cmd1 = "#0 P%d #1 P%d #2 P%d " % (leg_2_thetas[0], leg_2_thetas[1], leg_2_thetas[2])
-    cmd2 = "#12 P%d #13 P%d #15 P%d" % (leg_4_thetas[0], leg_4_thetas[1], leg_4_thetas[2])
+    cmd2 = "#12 P%d #13 P%d #14 P%d" % (leg_4_thetas[0], leg_4_thetas[1], leg_4_thetas[2])
     cmd3 = "#16 P%d #17 P%d #18 P%d" % (leg_1_thetas[0], leg_1_thetas[1], leg_1_thetas[2])
     cmd4 = "#28 P%d #29 P%d #30 P%d \r" % (leg_3_thetas[0], leg_3_thetas[1], leg_3_thetas[2])
 
