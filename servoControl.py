@@ -16,29 +16,35 @@ def startSerial():
 
 def angleToServoValue(thetas, leg_num):
     if leg_num == 1:
-        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 60, mapping(thetas[1],270,90,500,2500) + 50, mapping(thetas[2],270,90,500,2500) + 60]))
     elif leg_num == 2:
-        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 60, mapping(thetas[1],270,90,500,2500) + 205, mapping(thetas[2],270,90,500,2500) + 220]))
     elif leg_num == 3:
-        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 280, mapping(thetas[1],270,90,500,2500) + 200, mapping(thetas[2],270,90,500,2500) + 350]))
     elif leg_num == 4:
-        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500), mapping(thetas[1],270,90,500,2500), mapping(thetas[2],270,90,500,2500)]))
+        servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 330, mapping(thetas[1],270,90,500,2500) + 90, mapping(thetas[2],270,90,500,2500) + 180]))
     else:
         return ValueError
 
     if servoValues[0] > 2400:
+        print "ERROR: SERVO 0 OUT OF RANGE - HIGH"
         servoValues[0] = 2400
     elif servoValues[0] < 600:
+        print "ERROR: SERVO 0 OUT OF RANGE - LOW"
         servoValues[0] = 600
 
     if servoValues[1] > 2400:
+        print "ERROR: SERVO 1 OUT OF RANGE - HIGH"
         servoValues[1] = 2400
     elif servoValues[1] < 600:
+        print "ERROR: SERVO 1 OUT OF RANGE - LOW"
         servoValues[1] = 600
 
     if servoValues[2] > 2400:
+        print "ERROR: SERVO 2 OUT OF RANGE - HIGH"
         servoValues[2] = 2400
     elif servoValues[2] < 600:
+        print "ERROR: SERVO 2 OUT OF RANGE - LOW"
         servoValues[2] = 600
 
     return servoValues
