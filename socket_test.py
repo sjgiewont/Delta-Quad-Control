@@ -4,6 +4,7 @@ from socket import *
 from threading import Thread
 from Queue import Queue
 from servoControl import *
+import time
 import numpy as np
 
 MAX_LENGTH = 96
@@ -79,6 +80,7 @@ try:
         leg_3_servo = angleToServoValue([float(buf_array[6]), float(buf_array[7]), float(buf_array[8])], 3)
         leg_4_servo = angleToServoValue([float(buf_array[9]), float(buf_array[10]), float(buf_array[11])], 4)
         serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
+        time.sleep(0.001)
         # print leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo
 
 except:
