@@ -11,31 +11,70 @@ ser.open()
 if ser.isOpen():
     print "Serial is open!"
 
-leg1 = np.array([1, 2, 3])
-leg2 = np.array([4, 5, 6])
-leg3 = np.array([7, 8, 9])
-leg4 = np.array([10, 11, 12])
+leg1 = np.array([16, 17, 19])
+leg2 = np.array([0, 1, 2])
+leg3 = np.array([28, 30, 31])
+leg4 = np.array([12, 13, 14])
 
-# choose which leg here
-leg_value = 1
+leg_1_center = np.array([1500, 1500, 1500])
+leg_2_center = np.array([1500, 1500, 1500])
+leg_3_center = np.array([1500, 1500, 1500])
+leg_4_center = np.array([1500, 1500, 1500])
 
-if leg_value == 1:
-    leg = leg1
-elif leg_value == 2:
-    leg = leg2
-elif leg_value == 3:
-    leg = leg3
-elif leg_value == 4:
-    leg = leg4
-else:
-    print "Error"
+servo_1_default = 1500
+servo_2_default = 1500
+servo_3_default = 1500
 
-servo_values = np.array([1550, 1550, 1550])
+while True:
+    cmd1 = "#0 P%d #1 P%d #2 P%d " % (leg_2_center[0], leg_2_center[1], leg_2_center[2])
+    cmd2 = "#12 P%d #13 P%d #14 P%d" % (leg_4_center[0], leg_4_center[1], leg_4_center[2])
+    cmd3 = "#16 P%d #17 P%d #19 P%d" % (leg_1_center[0], leg_1_center[1], leg_1_center[2])
+    cmd4 = "#28 P%d #30 P%d #31 P%d \r" % (leg_3_center[0], leg_3_center[1], leg_3_center[2])
 
-final_cmd = "#%d P%d #%d P%d #%d P%d \r" % (leg[0], servo_values[0], leg[1], servo_values[1], leg[2], servo_values[2])
-ser.write(final_cmd)
+    final_cmd = " ".join((cmd1, cmd2, cmd3, cmd4))
+    print "Final command: ", final_cmd
+    ser.write(final_cmd)
 
-time.sleep(1)
+    time.sleep(0.5)
+
+    user_leg_sel = int(input("Choose a servo index, 1, 2, 3 or 4: "))
+    user_servo_sel = int(input("Choose a servo index, 0, 1 or 2: "))
+    user_input = int(input("Enter 0 to decrease, 1 to increase: "))
+
+    if user_leg_sel == 1:
+        if user_input == 1:
+            leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] + 1
+        elif user_input == 0:
+            leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] - 1
+        else:
+            print "ERROR: Wrong value entered!"
+    elif user_leg_sel == 2:
+        if user_input == 1:
+            leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] + 1
+        elif user_input == 0:
+            leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] - 1
+        else:
+            print "ERROR: Wrong value entered!"
+    elif user_leg_sel == 3:
+        if user_input == 1:
+            leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] + 1
+        elif user_input == 0:
+            leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] - 1
+        else:
+            print "ERROR: Wrong value entered!"
+    elif user_leg_sel == 4:
+        if user_input == 1:
+            leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] + 1
+        elif user_input == 0:
+            leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] - 1
+        else:
+            print "ERROR: Wrong value entered!"
+    elif user_leg_sel == 9:
+        break
+    else:
+        print "ERROR: Wrong leg entered"
+
+    time.sleep(1)
 
 print "DONE"
 
