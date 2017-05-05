@@ -26,9 +26,9 @@ def angleToServoValue(thetas, leg_num):
     else:
         return ValueError
 
-    if servoValues[0] > 2480:
+    if servoValues[0] > 2490:
         print "ERROR: SERVO 0 OUT OF RANGE - HIGH"
-        servoValues[0] = 2480
+        servoValues[0] = 2490
     elif servoValues[0] < 600:
         print "ERROR: SERVO 0 OUT OF RANGE - LOW"
         servoValues[0] = 600
