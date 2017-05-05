@@ -37,7 +37,7 @@ while True:
 
     time.sleep(0.5)
 
-    user_leg_sel = int(input("Choose a servo index, 1, 2, 3 or 4: "))
+    user_leg_sel = int(input("Choose a servo leg, 1, 2, 3, 4. Press 9 to EXIT "))
     user_servo_sel = int(input("Choose a servo index, 0, 1 or 2: "))
     user_input = int(input("Enter 0 to decrease, 1 to increase: "))
 
@@ -69,13 +69,13 @@ while True:
             leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] - 1
         else:
             print "ERROR: Wrong value entered!"
-    elif user_leg_sel == 9:
-        break
     else:
         print "ERROR: Wrong leg entered"
 
     time.sleep(1)
 
 print "DONE"
+
+print leg_1_center, leg_2_center, leg_3_center, leg_4_center
 
 ser.close()
