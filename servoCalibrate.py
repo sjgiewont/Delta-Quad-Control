@@ -16,14 +16,11 @@ leg2 = np.array([0, 1, 2])
 leg3 = np.array([28, 30, 31])
 leg4 = np.array([12, 13, 14])
 
-leg_1_center = np.array([1500, 1500, 1500])
-leg_2_center = np.array([1500, 1500, 1500])
-leg_3_center = np.array([1500, 1500, 1500])
-leg_4_center = np.array([1500, 1500, 1500])
+leg_1_center = np.array([1560, 1550, 1560])
+leg_2_center = np.array([1560, 1705, 1720])
+leg_3_center = np.array([1780, 1700, 1850])
+leg_4_center = np.array([1830, 1590, 1680])
 
-servo_1_default = 1500
-servo_2_default = 1500
-servo_3_default = 1500
 
 while True:
     cmd1 = "#0 P%d #1 P%d #2 P%d " % (leg_2_center[0], leg_2_center[1], leg_2_center[2])
