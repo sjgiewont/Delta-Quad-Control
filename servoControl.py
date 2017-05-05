@@ -26,9 +26,9 @@ def angleToServoValue(thetas, leg_num):
     else:
         return ValueError
 
-    if servoValues[0] > 2400:
+    if servoValues[0] > 2480:
         print "ERROR: SERVO 0 OUT OF RANGE - HIGH"
-        servoValues[0] = 2400
+        servoValues[0] = 2480
     elif servoValues[0] < 600:
         print "ERROR: SERVO 0 OUT OF RANGE - LOW"
         servoValues[0] = 600
@@ -61,7 +61,7 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     cmd4 = "#28 P%d #30 P%d #31 P%d \r" % (leg_3_thetas[0], leg_3_thetas[1], leg_3_thetas[2])
 
     final_cmd = " ".join((cmd1, cmd2, cmd3, cmd4))
-    print final_cmd
+    # print final_cmd
     ser.write(final_cmd)
 
 def serialSend_one(servo_values, leg_value):
