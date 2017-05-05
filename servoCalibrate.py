@@ -35,48 +35,53 @@ while True:
     print "Final command: ", final_cmd
     ser.write(final_cmd)
 
-    time.sleep(0.5)
-
-    user_leg_sel = int(input("Choose a servo leg, 1, 2, 3, 4. Press 9 to EXIT "))
+    user_leg_sel = int(input("Choose a servo leg, 1, 2, 3, 4. Press 9 to EXIT: "))
 
     if user_leg_sel == 9:
         break
 
     user_servo_sel = int(input("Choose a servo index, 0, 1 or 2: "))
-    user_input = int(input("Enter 0 to decrease, 1 to increase: "))
+    user_input = int(input("Enter the step: "))
+
+    if user_input > 100 or user_input < -100:
+        print "Error: Enter smaller number"
+        continue
 
     if user_leg_sel == 1:
-        if user_input == 1:
-            leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] + 1
-        elif user_input == 0:
-            leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] - 1
-        else:
-            print "ERROR: Wrong value entered!"
+        leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] + user_input
+        # if user_input == 1:
+        #     leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] + 1
+        # elif user_input == 0:
+        #     leg_1_center[user_servo_sel] = leg_1_center[user_servo_sel] - 1
+        # else:
+        #     print "ERROR: Wrong value entered!"
     elif user_leg_sel == 2:
-        if user_input == 1:
-            leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] + 1
-        elif user_input == 0:
-            leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] - 1
-        else:
-            print "ERROR: Wrong value entered!"
+        leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] + user_input
+        # if user_input == 1:
+        #     leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] + 1
+        # elif user_input == 0:
+        #     leg_2_center[user_servo_sel] = leg_2_center[user_servo_sel] - 1
+        # else:
+        #     print "ERROR: Wrong value entered!"
     elif user_leg_sel == 3:
-        if user_input == 1:
-            leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] + 1
-        elif user_input == 0:
-            leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] - 1
-        else:
-            print "ERROR: Wrong value entered!"
+        leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] + user_input
+        # if user_input == 1:
+        #     leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] + 1
+        # elif user_input == 0:
+        #     leg_3_center[user_servo_sel] = leg_3_center[user_servo_sel] - 1
+        # else:
+        #     print "ERROR: Wrong value entered!"
     elif user_leg_sel == 4:
-        if user_input == 1:
-            leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] + 1
-        elif user_input == 0:
-            leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] - 1
-        else:
-            print "ERROR: Wrong value entered!"
+        leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] + user_input
+        # if user_input == 1:
+        #     leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] + 1
+        # elif user_input == 0:
+        #     leg_4_center[user_servo_sel] = leg_4_center[user_servo_sel] - 1
+        # else:
+        #     print "ERROR: Wrong value entered!"
     else:
         print "ERROR: Wrong leg entered"
 
-    time.sleep(1)
 
 print "DONE"
 
