@@ -7,7 +7,7 @@ from servoControl import *
 import time
 import numpy as np
 
-MAX_LENGTH = 96
+MAX_LENGTH = 95
 
 def recieve_socket_commands(clientsocket, my_queue):
     angle = 4.5
