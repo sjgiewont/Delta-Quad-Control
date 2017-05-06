@@ -52,7 +52,8 @@ serversocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
 # define port and host address
 PORT = 12345
-HOST = '129.21.90.114'
+# HOST = '129.21.90.114'
+HOST = '192.168.7.2'
 
 serversocket.bind((HOST, PORT))
 serversocket.listen(10)
