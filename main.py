@@ -404,7 +404,7 @@ def blynk_controller():
 
     while not blynk.app_status():
         print "Phone not connected"
-        # time.sleep(0.5)
+        time.sleep(0.5)
 
     print "Phone connected"
 
@@ -432,7 +432,7 @@ def blynk_controller():
             blynk_angle = np.around(np.rad2deg(np.arctan2(blynk_y_pos, blynk_x_pos)))
             print blynk_angle
 
-        time.sleep(0.001)
+        time.sleep(0.1)
 
 
 
