@@ -17,15 +17,15 @@ def recieve_socket_commands(clientsocket, my_queue):
         while 1:
             buf = clientsocket.recv(MAX_LENGTH)
             # print "Buff", buf
-            buf_string = buf.decode()
-            buf_array = buf_string.split(",", 11)
+            # buf_string = buf.decode()
+            # buf_array = buf_string.split(",", 11)
             # print "buf array", buf_array
-            if len(buf_array) != 12:
+            if len(buf_array) != MAX_LENGTH:
                 buf = []
                 print "ERROR: Too many/not enough arguments received"
                 continue
             else:
-                my_queue.put(buf_array)
+                my_queue.put(buf)
     except:
         serversocket.close()
         return
@@ -75,6 +75,8 @@ startSerial()
 try:
     while 1:
         buf_array = my_queue.get()
+        buf_string = buf_array.decode()
+        buf_array = buf_string.split(",", 11)
         # print buf_array
         print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
         leg_1_servo = angleToServoValue([float(buf_array[0]), float(buf_array[1]), float(buf_array[2])], 1)
