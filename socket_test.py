@@ -7,7 +7,7 @@ from servoControl import *
 import time
 import numpy as np
 
-MAX_LENGTH = 95
+MAX_LENGTH = 116
 
 def recieve_socket_commands(clientsocket, my_queue):
     angle = 4.5
@@ -16,16 +16,17 @@ def recieve_socket_commands(clientsocket, my_queue):
     try:
         while 1:
             buf = clientsocket.recv(MAX_LENGTH)
-            # print "Buff", buf
-            # buf_string = buf.decode()
-            # buf_array = buf_string.split(",", 11)
+            #print "Buff", buf
+            #buf_string = buf.decode()
+	    #print buf_string
+            #buf_array = buf_string.split(",", 11)
             # print "buf array", buf_array
-            if len(buf_array) != MAX_LENGTH:
+            if len(buf) != MAX_LENGTH:
                 buf = []
                 print "ERROR: Too many/not enough arguments received"
                 continue
             else:
-                my_queue.put(buf)
+            	my_queue.put(buf)
     except:
         serversocket.close()
         return
@@ -74,17 +75,23 @@ startSerial()
 
 try:
     while 1:
-        buf_array = my_queue.get()
-        buf_string = buf_array.decode()
-        buf_array = buf_string.split(",", 11)
-        # print buf_array
-        print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
-        leg_1_servo = angleToServoValue([float(buf_array[0]), float(buf_array[1]), float(buf_array[2])], 1)
-        leg_2_servo = angleToServoValue([float(buf_array[3]), float(buf_array[4]), float(buf_array[5])], 2)
-        leg_3_servo = angleToServoValue([float(buf_array[6]), float(buf_array[7]), float(buf_array[8])], 3)
-        leg_4_servo = angleToServoValue([float(buf_array[9]), float(buf_array[10]), float(buf_array[11])], 4)
-        serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
-        time.sleep(0.010)
+        buff = my_queue.get()
+	#print buff
+        buf_string = buff.decode()
+	print buf_string
+	serialSend(buf_string)
+	#print buf_string
+        #buf_array = buf_string.split(",", 11)
+        #print buf_array
+        # print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
+        #leg_1_servo = float(buf_array[0]), float(buf_array[1]), float(buf_array[2])], 1)
+        #leg_2_servo = angleToServoValue([float(buf_array[3]), float(buf_array[4]), float(buf_array[5])], 2)
+        #leg_3_servo = angleToServoValue([float(buf_array[6]), float(buf_array[7]), float(buf_array[8])], 3)
+        #leg_4_servo = angleToServoValue([float(buf_array[9]), float(buf_array[10]), float(buf_array[11])], 4)
+        
+	#serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
+        
+	#time.sleep(0.010)
         # print leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo
 
 except:

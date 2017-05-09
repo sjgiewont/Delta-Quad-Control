@@ -64,6 +64,12 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     print final_cmd
     ser.write(final_cmd)
 
+
+def serialSend(serial_string):
+    print serial_string
+    ser.write(serial_string)    
+
+
 def serialSend_one(servo_values, leg_value):
     leg1 = np.array([1, 2, 3])
     leg2 = np.array([4, 5, 6])
