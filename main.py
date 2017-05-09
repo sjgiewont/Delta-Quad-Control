@@ -10,8 +10,7 @@ import timeit
 import thread
 from threading import Thread
 from Blynk import *
-from time import *
-from time import sleep
+import time
 
 blynk_x_pos = 0
 blynk_y_pos = 0
