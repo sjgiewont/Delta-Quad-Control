@@ -18,7 +18,7 @@ def recieve_socket_commands(clientsocket, my_queue):
             buf = clientsocket.recv(MAX_LENGTH)
             #print "Buff", buf
             #buf_string = buf.decode()
-	    #print buf_string
+            #print buf_string
             #buf_array = buf_string.split(",", 11)
             # print "buf array", buf_array
             if len(buf) != MAX_LENGTH:
@@ -26,7 +26,7 @@ def recieve_socket_commands(clientsocket, my_queue):
                 print "ERROR: Too many/not enough arguments received"
                 continue
             else:
-            	my_queue.put(buf)
+                my_queue.put(buf)
     except:
         serversocket.close()
         return
@@ -78,7 +78,6 @@ try:
         buff = my_queue.get()
         #print buff
         buf_string = buff.decode()
-        print buf_string
         serialSend(buf_string)
         #print buf_string
         #buf_array = buf_string.split(",", 11)
