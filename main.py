@@ -404,7 +404,7 @@ def blynk_controller():
 
     while not blynk.app_status():
         print "Phone not connected"
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
     print "Phone connected"
 
