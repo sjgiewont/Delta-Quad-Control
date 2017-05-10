@@ -19,7 +19,7 @@ leg4 = np.array([12, 13, 14])
 leg_1_center = np.array([1560, 1550, 1560])
 leg_2_center = np.array([1560, 1705, 1720])
 leg_3_center = np.array([1780, 1700, 1850])
-leg_4_center = np.array([1830, 1590, 1680])
+leg_4_center = np.array([1500, 1590, 1680])
 
 
 while True:
