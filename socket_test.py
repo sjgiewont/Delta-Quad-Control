@@ -7,7 +7,7 @@ from servoControl import *
 import time
 import numpy as np
 
-MAX_LENGTH = 116
+MAX_LENGTH = 119
 
 def recieve_socket_commands(clientsocket, my_queue):
     angle = 4.5
@@ -79,6 +79,7 @@ try:
         #print buff
         buf_string = buff.decode()
         serialSend(buf_string)
+
         #print buf_string
         #buf_array = buf_string.split(",", 11)
         #print buf_array
