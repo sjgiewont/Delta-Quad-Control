@@ -92,7 +92,7 @@ def walk_dir(step_length, step_height, degrees, step_num, precision):
         leg_2_servoval = angleToServoValue(leg2, 2)
         leg_3_servoval = angleToServoValue(leg3, 3)
         leg_4_servoval = angleToServoValue(leg4, 4)
-        serialSend_All(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
+        serialSendServoVals(leg_1_servoval, leg_2_servoval, leg_3_servoval, leg_4_servoval)
 
 
     # step a certain amount of times
@@ -151,7 +151,7 @@ def walk_small(curr_pos, step_length, step_height, degrees, step_num, precision)
             leg3 = inverseKinematics(parabola_motion_3[index])
             leg4 = inverseKinematics(parabola_motion_4[index])
 
-            serialSend_All(leg1, leg2, leg3, leg4)
+            serialSendServoVals(leg1, leg2, leg3, leg4)
 
     else:
         start_step_precision = 2
@@ -165,7 +165,7 @@ def walk_small(curr_pos, step_length, step_height, degrees, step_num, precision)
             leg2 = inverseKinematics(parabola_motion_2[index])
             leg3 = inverseKinematics(parabola_motion_3[index])
             leg4 = inverseKinematics(parabola_motion_4[index])
-            serialSend_All(leg1, leg2, leg3, leg4)
+            serialSendServoVals(leg1, leg2, leg3, leg4)
 
     # step a certain amount of times
     while(steps < step_num):
@@ -272,7 +272,7 @@ def homePos(curr_pos, delay_time):
             leg2 = inverseKinematics(curr_pos[1])
             leg3 = inverseKinematics(curr_pos[2])
             leg4 = inverseKinematics(curr_pos[3])
-            serialSend_All(leg1, leg2, leg3, leg4)
+            serialSendServoVals(leg1, leg2, leg3, leg4)
             # msg = '{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f}\n'.format(leg1[0], leg1[1], leg1[2], leg2[0], leg2[1], leg2[2], leg3[0], leg3[1], leg3[2], leg4[0], leg4[1], leg4[2])
             # # vrep_socket.send(msg)
             # bbb_socket.send(msg)
@@ -290,7 +290,7 @@ def homePos(curr_pos, delay_time):
             leg2 = inverseKinematics(parabola_motion_2[index])
             leg3 = inverseKinematics(curr_pos[2])
             leg4 = inverseKinematics(curr_pos[3])
-            serialSend_All(leg1, leg2, leg3, leg4)
+            serialSendServoVals(leg1, leg2, leg3, leg4)
             # msg = '{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f}\n'.format(leg1[0], leg1[1], leg1[2], leg2[0], leg2[1], leg2[2], leg3[0], leg3[1], leg3[2], leg4[0], leg4[1], leg4[2])
             # # vrep_socket.send(msg)
             # bbb_socket.send(msg)
@@ -308,7 +308,7 @@ def homePos(curr_pos, delay_time):
             leg2 = inverseKinematics(curr_pos[1])
             leg3 = inverseKinematics(parabola_motion_3[index])
             leg4 = inverseKinematics(curr_pos[3])
-            serialSend_All(leg1, leg2, leg3, leg4)
+            serialSendServoVals(leg1, leg2, leg3, leg4)
             # msg = '{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f}\n'.format(leg1[0], leg1[1], leg1[2], leg2[0], leg2[1], leg2[2], leg3[0], leg3[1], leg3[2], leg4[0], leg4[1],leg4[2])
             # # vrep_socket.send(msg)
             # bbb_socket.send(msg)
@@ -326,7 +326,7 @@ def homePos(curr_pos, delay_time):
             leg2 = inverseKinematics(curr_pos[1])
             leg3 = inverseKinematics(curr_pos[2])
             leg4 = inverseKinematics(parabola_motion_4[index])
-            serialSend_All(leg1, leg2, leg3, leg4)
+            serialSendServoVals(leg1, leg2, leg3, leg4)
             # msg = '{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f}\n'.format(leg1[0], leg1[1], leg1[2], leg2[0], leg2[1], leg2[2], leg3[0], leg3[1], leg3[2], leg4[0], leg4[1],leg4[2])
             # # vrep_socket.send(msg)
             # bbb_socket.send(msg)
@@ -354,7 +354,7 @@ def homePos(curr_pos, delay_time):
         if curr_pos[3][0] != 0:
             leg4 = inverseKinematics(parabola_motion_4[index])
 
-        serialSend_All(leg1, leg2, leg3, leg4)
+        serialSendServoVals(leg1, leg2, leg3, leg4)
         # msg = '{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f},{:07.3f}\n'.format(leg1[0], leg1[1], leg1[2], leg2[0], leg2[1], leg2[2], leg3[0], leg3[1], leg3[2], leg4[0], leg4[1], leg4[2])
         # # vrep_socket.send(msg)
         # bbb_socket.send(msg)
@@ -378,7 +378,7 @@ def startPos():
     leg2 = inverseKinematics(home_pos)
     leg3 = inverseKinematics(home_pos)
     leg4 = inverseKinematics(home_pos)
-    serialSend_All(leg1, leg2, leg3, leg4)
+    serialSendServoVals(leg1, leg2, leg3, leg4)
 
     return [home_pos, home_pos, home_pos, home_pos]
 
@@ -390,7 +390,7 @@ def moveToPos(trajectory_R, trajectory_L, index):
     leg3 = inverseKinematics(trajectory_L[index[2]])
     leg4 = inverseKinematics(trajectory_L[index[3]])
 
-    serialSend_All(leg1, leg2, leg3, leg4)
+    serialSendServoVals(leg1, leg2, leg3, leg4)
 
 
 def blynk_controller():
