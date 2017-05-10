@@ -67,8 +67,8 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
 
 def serialSend(ser, serial_string):
     print 'hi'
-    print serial_string
-    ser.write(serial_string)
+    print str(serial_string)
+    ser.write(str(serial_string))
     print 'bye'
     return
 
