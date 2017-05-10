@@ -53,6 +53,7 @@ def angleToServoValue(thetas, leg_num):
 
 
 def mapping(value, fromLow, fromHigh, toLow, toHigh):
+    print (((value - fromLow) * (toHigh - toLow)) / (fromHigh - fromLow)) + toLow
     return (((value - fromLow) * (toHigh - toLow)) / (fromHigh - fromLow)) + toLow
 
 
