@@ -15,6 +15,7 @@ def startSerial():
 
 
 def angleToServoValue(thetas, leg_num):
+    print thetas
     if leg_num == 1:
         servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 60, mapping(thetas[1],270,90,500,2500) + 50, mapping(thetas[2],270,90,500,2500) + 60]))
     elif leg_num == 2:
