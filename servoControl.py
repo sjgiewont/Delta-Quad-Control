@@ -65,6 +65,22 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
     ser.write(final_cmd)
 
 
+def serialSendServoVals(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
+    leg_1_servo = angleToServoValue(leg_1_thetas, 1)
+    leg_2_servo = angleToServoValue(leg_2_thetas, 2)
+    leg_3_servo = angleToServoValue(leg_3_thetas, 3)
+    leg_4_servo = angleToServoValue(leg_4_thetas, 4)
+
+    cmd1 = "#0 P%d #1 P%d #2 P%d " % (leg_2_servo[0], leg_2_servo[1], leg_2_servo[2])
+    cmd2 = "#12 P%d #13 P%d #14 P%d" % (leg_4_servo[0], leg_4_servo[1], leg_4_servo[2])
+    cmd3 = "#16 P%d #17 P%d #19 P%d" % (leg_1_servo[0], leg_1_servo[1], leg_1_servo[2])
+    cmd4 = "#28 P%d #30 P%d #31 P%d \r" % (leg_3_servo[0], leg_3_servo[1], leg_3_servo[2])
+
+    final_cmd = " ".join((cmd1, cmd2, cmd3, cmd4))
+    print final_cmd
+    ser.write(final_cmd)
+
+
 def serialSend(ser, serial_string):
     print 'hi'
     print serial_string

@@ -151,12 +151,7 @@ def walk_small(curr_pos, step_length, step_height, degrees, step_num, precision)
             leg3 = inverseKinematics(parabola_motion_3[index])
             leg4 = inverseKinematics(parabola_motion_4[index])
 
-            leg_1_servo = angleToServoValue(leg1, 1)
-            leg_2_servo = angleToServoValue(leg2, 2)
-            leg_3_servo = angleToServoValue(leg3, 3)
-            leg_4_servo = angleToServoValue(leg4, 4)
-
-            serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
+            serialSend_All(leg1, leg2, leg3, leg4)
 
     else:
         start_step_precision = 2
