@@ -82,7 +82,7 @@ try:
 
         #print buf_string
         #buf_array = buf_string.split(",", 11)
-        #print buf_array
+        print buf_array
         # print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
         leg_1_servo = angleToServoValue([float(buf_array[0]), float(buf_array[1]), float(buf_array[2])], 1)
         leg_2_servo = angleToServoValue([float(buf_array[3]), float(buf_array[4]), float(buf_array[5])], 2)
