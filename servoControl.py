@@ -55,7 +55,6 @@ def mapping(value, fromLow, fromHigh, toLow, toHigh):
 
 
 def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
-    print leg_1_thetas
     cmd1 = "#0 P%d #1 P%d #2 P%d " % (leg_2_thetas[0], leg_2_thetas[1], leg_2_thetas[2])
     cmd2 = "#12 P%d #13 P%d #14 P%d" % (leg_4_thetas[0], leg_4_thetas[1], leg_4_thetas[2])
     cmd3 = "#16 P%d #17 P%d #19 P%d" % (leg_1_thetas[0], leg_1_thetas[1], leg_1_thetas[2])
@@ -68,8 +67,8 @@ def serialSend_All(leg_1_thetas, leg_2_thetas, leg_3_thetas, leg_4_thetas):
 
 def serialSend(ser, serial_string):
     print 'hi'
-    print str(serial_string)
-    ser.write(str(serial_string))
+    print serial_string
+    ser.write(serial_string)
     print 'bye'
     return
 
