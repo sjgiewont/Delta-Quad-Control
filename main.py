@@ -409,18 +409,18 @@ def blynk_controller():
     print "Phone connected"
 
     # create objects
-    slider_height = Blynk(auth_token, pin="V0")
+    # slider_height = Blynk(auth_token, pin="V0")
     joystick_pos = Blynk(auth_token, pin="V1")
     power_button = Blynk(auth_token, pin="V3")
 
     # get current status
     while (1):
         curr_power = power_button.get_val()
-        curr_height = slider_height.get_val()
+        # curr_height = slider_height.get_val()
         curr_pos = joystick_pos.get_val()
 
         blynk_power = int(curr_power[0])
-        blynk_height = int(curr_height[0])
+        # blynk_height = int(curr_height[0])
         blynk_x_pos = (512 - int(curr_pos[0]))
         blynk_y_pos = -(512 - int(curr_pos[1]))
 
