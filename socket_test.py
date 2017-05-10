@@ -84,10 +84,10 @@ try:
         #buf_array = buf_string.split(",", 11)
         print buf_array
         # print(float(buf_array[0]), float(buf_array[1]), float(buf_array[2]))
-        leg_1_servo = angleToServoValue([float(buf_array[0]), float(buf_array[1]), float(buf_array[2])], 1)
-        leg_2_servo = angleToServoValue([float(buf_array[3]), float(buf_array[4]), float(buf_array[5])], 2)
-        leg_3_servo = angleToServoValue([float(buf_array[6]), float(buf_array[7]), float(buf_array[8])], 3)
-        leg_4_servo = angleToServoValue([float(buf_array[9]), float(buf_array[10]), float(buf_array[11])], 4)
+        leg_1_servo = angleToServoValue([int(buf_array[0]), int(buf_array[1]), int(buf_array[2])], 1)
+        leg_2_servo = angleToServoValue([int(buf_array[3]), int(buf_array[4]), int(buf_array[5])], 2)
+        leg_3_servo = angleToServoValue([int(buf_array[6]), int(buf_array[7]), int(buf_array[8])], 3)
+        leg_4_servo = angleToServoValue([int(buf_array[9]), int(buf_array[10]), int(buf_array[11])], 4)
         
         serialSend_All(leg_1_servo, leg_2_servo, leg_3_servo, leg_4_servo)
 
