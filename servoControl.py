@@ -18,6 +18,7 @@ def angleToServoValue(thetas, leg_num):
     print thetas
     if leg_num == 1:
         servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 60, mapping(thetas[1],270,90,500,2500) + 50, mapping(thetas[2],270,90,500,2500) + 60]))
+        print servoValues
     elif leg_num == 2:
         servoValues = np.around(np.array([mapping(thetas[0],270,90,500,2500) + 60, mapping(thetas[1],270,90,500,2500) + 205, mapping(thetas[2],270,90,500,2500) + 220]))
     elif leg_num == 3:
