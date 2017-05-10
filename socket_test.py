@@ -71,14 +71,14 @@ socket_read_thread = Thread(target=recieve_socket_commands, args=(clientsocket, 
 socket_read_thread.start()
 # recieve_socket_commands(clientsocket)
 
-startSerial()
+ser = startSerial()
 
 try:
     while 1:
         buff = my_queue.get()
         #print buff
         buf_string = buff.decode()
-        serialSend(buf_string)
+        serialSend(ser, buf_string)
 
         #print buf_string
         #buf_array = buf_string.split(",", 11)
