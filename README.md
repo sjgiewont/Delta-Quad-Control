@@ -1,5 +1,8 @@
 # Delta-Quad Control
 
+![alt text](https://github.com/sjgiewont/Delta-Quad-Control/blob/master/deltaquad_12_full_12.png)
+
+
 Contains all code running on BeagleBone Black (or similar single board computer) to control the Delta-Quad.
 
  * Custom library for evaulating ANFIS
